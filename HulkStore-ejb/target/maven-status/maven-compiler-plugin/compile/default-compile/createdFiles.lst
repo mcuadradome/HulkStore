@@ -1,0 +1,9 @@
+Entidades\IngresoProductos.class
+Objects\ItemProductoVO.class
+Entidades\SalidaProductos.class
+Objects\IngresoStock.class
+Objects\ProductoVO.class
+com\hulkStore\HulkStoreEJB.class
+Entidades\Producto.class
+Objects\SalioStock.class
+com\hulkStore\AbstractFacade.class

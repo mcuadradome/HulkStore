@@ -1,0 +1,110 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+     
+    <h:head>
+        <style type="text/css">
+            body {
+               background-color: #ACACAC;
+            }
+            
+            
+        </style>
+    </h:head>
+ 
+    <h:body>
+        <div class="title">
+            <h1>HulkStore - Sistema kardex</h1>
+        </div>
+        
+        <div>
+            <h:form>
+                <div class="actions">
+                <p:commandButton id="btnAgregarPedido" type="button" icon="ui-icon-pin-s" value="Agregar Pedido" onclick="PF('dlgAgregarPedido').show();" />
+		<p:commandButton id="btnAgregarProducto" type="button" icon="ui-icon-pin-s" value="Agregar Productos" onclick="PF('dlgAgregarProducto').show();" />
+		    
+                </div>
+                
+                <div style="margin-top: 25px" class="contend">
+                    <p:growl id="growl" showDetail="true" sticky="true" />
+                    <p:dataTable id="table" var="product" value="#{hulkStoreMB.list}" editMode="cell" editable="true" paginator="true" rows="10" >
+			 
+                        <p:ajax event="cellEdit" listener="#{dtEditView.onCellEdit}" update=":form:msgs" />
+                        
+                        <p:column filterBy="#{product.nombre}" headerText="Nombre">
+                       
+                            <h:outputText value="#{product.nombre}"></h:outputText>
+                        </p:column>
+                        
+                         <p:column headerText="Precio">
+                           
+                            <h:outputText value="#{product.precio}"></h:outputText>
+                        </p:column>
+                        
+                         <p:column headerText="Stock">
+                            <f:facet name="header">Stock</f:facet>
+                            <h:outputText value="#{product.stock}"></h:outputText>
+                        </p:column>
+                        
+                         <p:column headerText="Venta">                          
+                         
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="0"></h:outputText>
+                                </f:facet>
+                                
+                                <f:facet name="input">
+                                    <p:inputText value="#{product.venta}" />
+                                    <f:validateLongRange minimum="0" />
+                                    <f:validateRequired />
+                                </f:facet>
+                                 
+                            </p:cellEditor>                         
+                        </p:column>
+				
+			</p:dataTable>
+                </div>
+                
+            <p:dialog id="dialogPedido" header="Agregar Producto"
+					widgetVar="dlgAgregarPedido" width="300" height="400" modal="true"
+					hideEffect="fade" showEffect="fade" resizable="false">
+					
+			 <span class="ui-float-label">
+                             <p:inputText id="float-input1" value="#{hulkStoreMB.nombreProducto}" />
+                             <p:outputLabel for="@previous" value="Nombre producto" />
+   			</span>
+                
+                         <span class="ui-float-label">
+                             <p:inputText id="float-input1" value="#{hulkStoreMB.precioProducto}" />
+                             <p:outputLabel for="@previous" value="Nombre producto" />
+   			</span>
+                
+                <p:commandButton actionListener="#{hulkStoreMB.guardarProducto()}" id="btnSave" update="growl,table" style="margin-right:20px;" icon="pi pi-save" title="Guardar" />
+				
+		</p:dialog>
+		
+		<p:dialog id="dialogProducto" header="AgregarStock"
+					widgetVar="dlgAgregarProducto" width="300" height="400" modal="true"
+					hideEffect="fade" showEffect="fade" resizable="false">
+					
+			  <span class="ui-float-label">
+                              <p:inputText id="float-input1" value="#{hulkStoreMB.proveedor}" />
+                             <p:outputLabel for="@previous" value="Proveedor" />
+   			</span>
+                
+                         <span class="ui-float-label">
+                             <p:inputText id="float-input1" value="#{hulkStoreMB.salidaStock}" />
+                             <p:outputLabel for="@previous" value="Stock" />
+   			</span>
+                    
+                     <p:commandButton actionListener="#{hulkStoreMB.guardarProducto()}" id="btnSave" update="growl,table" style="margin-right:20px;" icon="pi pi-save" title="Guardar" />
+		
+				
+		</p:dialog>
+  
+            </h:form>
+            
+        </div>
+    </h:body>
+</html>

@@ -1,0 +1,11 @@
+Pasos para desplegar el proyecto
+
+1. crear la base de datos HulkStore en SQLServer express
+
+2. configuara el servidor de aplicaciones WildFly vr 13 descargar el datasource jdb de sqlserver version 42
+	- Driver Class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+	- Driver Name: sqljdbc42.jar
+	- JNDI Name: java:/SopDS_jndi
+	- Connection URL: dbc:sqlserver://urlservidor\SQLEXPRESS;databaseName=HulkStore
+	- usuario y contraseña del la BD
+

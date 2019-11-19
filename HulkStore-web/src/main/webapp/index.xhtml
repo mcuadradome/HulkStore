@@ -9,7 +9,11 @@
                background-color: #ACACAC;
             }
             
-            
+            .title{
+                text-align: center;
+                margin-bottom: 100px;
+                margin-top: 15px;
+            }
         </style>
     </h:head>
  
@@ -30,7 +34,7 @@
                     <p:growl id="growl" showDetail="true" sticky="true" />
                     <p:dataTable id="table" var="product" value="#{hulkStoreMB.list}" editMode="cell" editable="true" paginator="true" rows="10" >
 			 
-                        <p:ajax event="cellEdit" listener="#{dtEditView.onCellEdit}" update=":form:msgs" />
+                        <p:ajax event="cellEdit" listener="#{dtEditView.onCellEdit}" update="table" />
                         
                         <p:column filterBy="#{product.nombre}" headerText="Nombre">
                        
@@ -55,9 +59,7 @@
                                 </f:facet>
                                 
                                 <f:facet name="input">
-                                    <p:inputText value="#{product.venta}" />
-                                    <f:validateLongRange minimum="0" />
-                                    <f:validateRequired />
+                                    <p:inputText value="#{product.venta}" />                                                                 
                                 </f:facet>
                                  
                             </p:cellEditor>                         
@@ -67,38 +69,41 @@
                 </div>
                 
             <p:dialog id="dialogPedido" header="Agregar Producto"
-					widgetVar="dlgAgregarPedido" width="300" height="400" modal="true"
+					widgetVar="dlgAgregarPedido" width="300" height="350" modal="true"
 					hideEffect="fade" showEffect="fade" resizable="false">
 					
 			 <span class="ui-float-label">
+                              <h3>Nombre producto </h3>
                              <p:inputText id="float-input1" value="#{hulkStoreMB.nombreProducto}" />
-                             <p:outputLabel for="@previous" value="Nombre producto" />
+                           
    			</span>
                 
                          <span class="ui-float-label">
-                             <p:inputText id="float-input1" value="#{hulkStoreMB.precioProducto}" />
-                             <p:outputLabel for="@previous" value="Nombre producto" />
+                             <h3>Precio producto </h3>
+                             <p:inputText id="float-input2" value="#{hulkStoreMB.precioProducto}" />
+                             
    			</span>
                 
-                <p:commandButton actionListener="#{hulkStoreMB.guardarProducto()}" id="btnSave" update="growl,table" style="margin-right:20px;" icon="pi pi-save" title="Guardar" />
+                <p:commandButton actionListener="#{hulkStoreMB.guardarProducto()}" id="btnSave" update="growl,table" style="margin-right:20px;" icon="pi pi-save" value="Guardar"  />
 				
 		</p:dialog>
 		
 		<p:dialog id="dialogProducto" header="AgregarStock"
-					widgetVar="dlgAgregarProducto" width="300" height="400" modal="true"
+					widgetVar="dlgAgregarProducto" width="300" height="350" modal="true"
 					hideEffect="fade" showEffect="fade" resizable="false">
 					
 			  <span class="ui-float-label">
-                              <p:inputText id="float-input1" value="#{hulkStoreMB.proveedor}" />
-                             <p:outputLabel for="@previous" value="Proveedor" />
+                              <h3>Proveedor </h3>
+                              <p:inputText id="float-input3" value="#{hulkStoreMB.proveedor}" />
+                             
    			</span>
                 
                          <span class="ui-float-label">
-                             <p:inputText id="float-input1" value="#{hulkStoreMB.salidaStock}" />
-                             <p:outputLabel for="@previous" value="Stock" />
+                             <h3>Stock </h3>
+                             <p:inputText id="float-input4" value="#{hulkStoreMB.salidaStock}" />                           
    			</span>
                     
-                     <p:commandButton actionListener="#{hulkStoreMB.guardarProducto()}" id="btnSave" update="growl,table" style="margin-right:20px;" icon="pi pi-save" title="Guardar" />
+                     <p:commandButton actionListener="#{hulkStoreMB.guardarProducto()}" id="btn" update="growl,table" style="margin-right:20px;" icon="pi pi-save" value="Guardar" />
 		
 				
 		</p:dialog>

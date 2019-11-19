@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,8 +28,6 @@ public class IngresoProductos implements Serializable{
     private String proveedor;
      
     @Column(name = "producto_fk")
-    @JoinColumn(name = "producto_fk" , referencedColumnName = "codProducto")
-    @OneToMany
     private int productoFK;   
 
     @Column(name = "cantidad")

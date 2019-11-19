@@ -20,7 +20,7 @@ import javax.persistence.Query;
 @Stateless
 public class HulkStoreEJB  extends AbstractFacade{
     
-    @PersistenceContext(unitName = "SopDS_jndi")
+    @PersistenceContext(unitName = "persistence")
     private EntityManager em;
     @Override
     
